@@ -1,0 +1,2 @@
+tool.o: ../../src/tool.cpp ../../src/tool.h ../../src/public.h \
+ ../../src/../include/HCNetSDK.h

@@ -1,0 +1,2 @@
+Alarm.o: ../../src/Alarm.cpp ../../src/public.h \
+ ../../src/../include/HCNetSDK.h ../../src/Alarm.h

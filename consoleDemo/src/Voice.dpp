@@ -1,0 +1,2 @@
+Voice.o: ../../src/Voice.cpp ../../src/public.h \
+ ../../src/../include/HCNetSDK.h ../../src/Voice.h

@@ -1,0 +1,2 @@
+ConfigParams.o: ../../src/ConfigParams.cpp ../../src/ConfigParams.h \
+ ../../src/public.h ../../src/../include/HCNetSDK.h

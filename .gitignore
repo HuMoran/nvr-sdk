@@ -24,8 +24,8 @@
 
 # Shared objects (inc. Windows DLLs)
 *.dll
-*.so
-*.so.*
+# *.so
+# *.so.*
 *.dylib
 
 # Executables
@@ -45,6 +45,7 @@
 # Kernel Module Compile Results
 *.mod*
 *.cmd
+*.log
 .tmp_versions/
 modules.order
 Module.symvers

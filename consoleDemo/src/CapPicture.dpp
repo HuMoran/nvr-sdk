@@ -1,0 +1,2 @@
+CapPicture.o: ../../src/CapPicture.cpp ../../src/public.h \
+ ../../src/../include/HCNetSDK.h ../../src/CapPicture.h

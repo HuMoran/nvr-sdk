@@ -1,0 +1,4 @@
+consoleMain.o: ../../src/consoleMain.cpp ../../src/GetStream.h \
+ ../../src/public.h ../../src/../include/HCNetSDK.h \
+ ../../src/ConfigParams.h ../../src/Alarm.h ../../src/CapPicture.h \
+ ../../src/playback.h ../../src/Voice.h ../../src/tool.h
