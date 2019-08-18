@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/HCNetSDK.h"
+using namespace std;
 
 int main(int argc, char *argv[]) {
   if (argc < 5) {
@@ -37,8 +38,14 @@ int main(int argc, char *argv[]) {
   memcpy(struLoginInfo.sDeviceAddress, ip, NET_DVR_DEV_ADDRESS_MAX_LEN);
   memcpy(struLoginInfo.sUserName, username, NAME_LEN);
   memcpy(struLoginInfo.sPassword, password, NAME_LEN);
+  // struLoginInfo.wPort = 8000;
+  // memcpy(struLoginInfo.sDeviceAddress, "192.168.1.106", NET_DVR_DEV_ADDRESS_MAX_LEN);
+  // memcpy(struLoginInfo.sUserName, "admin", NAME_LEN);
+  // memcpy(struLoginInfo.sPassword, "admin123", NAME_LEN);
 
   int lUserID = NET_DVR_Login_V40(&struLoginInfo, &struDeviceInfoV40);
+  printf("lUserID:%d\n", lUserID);
+
   if (lUserID < 0) {
       printf("Login error, %d\n", NET_DVR_GetLastError());
       NET_DVR_Cleanup();
@@ -47,22 +54,29 @@ int main(int argc, char *argv[]) {
 
   NET_DVR_HDCFG struDevConfig = {0};
   DWORD uiReturnLen;
-  int iRet = NET_DVR_GetDVRConfig(lUserID, NET_DVR_GET_HDCFG, 0xFFFFFFFF, struDevConfig, sizeof(NET_DVR_HDCFG), uiReturnLen);
+  int iRet = NET_DVR_GetDVRConfig(
+    lUserID,
+    NET_DVR_GET_HDCFG,
+    0xFFFFFFFF,
+    &struDevConfig,
+    sizeof(NET_DVR_HDCFG),
+    &uiReturnLen
+  );
   if (!iRet) {
     printf("Get NET_DVR_GetDVRConfig error:%d\n", NET_DVR_GetLastError());
     NET_DVR_Logout_V30(lUserID);
     NET_DVR_Cleanup();
     return -1;
   }
-  printf("HDCount: %d\n", struDevConfig.dvHDCount);
-  for(int i = 0; i < struDevConfig.dvHDCount; i++) {
-    printf("No: %d, Capacity: %d, FreeSpace: %d, Status: %d, Type: %d, GRoup",
+  printf("HDCount: %d\n", struDevConfig.dwHDCount);
+  for(int i = 0; i < (int)struDevConfig.dwHDCount; i++) {
+    printf("No: %d, Capacity: %d, FreeSpace: %d, Status: %d, Type: %d, GRoup: %d\n",
       struDevConfig.struHDInfo[i].dwHDNo,
       struDevConfig.struHDInfo[i].dwCapacity,
       struDevConfig.struHDInfo[i].dwFreeSpace,
       struDevConfig.struHDInfo[i].dwHdStatus,
       struDevConfig.struHDInfo[i].byHDType,
-      struDevConfig.struHDInfo[i].dwHdGroup,
+      struDevConfig.struHDInfo[i].dwHdGroup
     );
   }
   NET_DVR_Logout_V30(lUserID);

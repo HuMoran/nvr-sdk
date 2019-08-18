@@ -45,21 +45,28 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  // 数字通道个数，高8位
-  int iIpChanNum = struDeviceInfoV40.struDeviceV30.byHighDChanNum;
+  // 数字通道个数，高8位*256+低8位
+  int iIpChanNum = struDeviceInfoV40.struDeviceV30.byHighDChanNum * 256 + struDeviceInfoV40.struDeviceV30.byIPChanNum;
   // 数字通道起始通道号, 0表示无通道
   int iIpChanStart = struDeviceInfoV40.struDeviceV30.byStartDChan;
-  // 模拟通道暂时忽略
+  // 模拟通道个数
+  int iChanNum = struDeviceInfoV40.struDeviceV30.byChanNum;
+  // 模拟通道起始通道号, 从1开始
+  int iChanStart = struDeviceInfoV40.struDeviceV30.byStartChan;
+  printf("硬盘个数:%d\n", struDeviceInfoV40.struDeviceV30.byDiskNum);
+  printf("设备类型:%d\n", struDeviceInfoV40.struDeviceV30.byDVRType);
+  printf("模拟通道个数:%d, 模拟通道起始通道号:%d\n", iChanNum, iChanStart);
+  printf("数字通道个数:%d, 数字通道起始通道号:%d\n", iIpChanNum, iIpChanStart);
 
-  NET_DVR_GET_RECORDCFG_V40 struRecordCfg = {0};
+  NET_DVR_RECORD_V40 struRecordCfg = {0};
   DWORD uiReturnLen;
   int iRet = NET_DVR_GetDVRConfig(
     lUserID,
     NET_DVR_GET_RECORDCFG_V40,
-    iIpChanStart,
-    struRecordCfg,
-    sizeof(NET_DVR_GET_RECORDCFG_V40),
-    uiReturnLen,
+    34,
+    &struRecordCfg,
+    sizeof(NET_DVR_RECORD_V40),
+    &uiReturnLen
   );
   if (!iRet) {
     printf("Get NET_DVR_GetDVRConfig error:%d\n", NET_DVR_GetLastError());
@@ -69,8 +76,11 @@ int main(int argc, char *argv[]) {
   }
   printf("是否启用计划录像配置: %s\n", struRecordCfg.dwRecord == 0 ? "否" : "是");
   for (int i = 0; i < 7; i++) {
-    printf("星期[%d]是否全天录像: %s\n", i + 1, struRecordCfg.struRecAllDay[i].byAllDayRecord == 0 ? "否" : "是");
-    printf("星期[%d]录像类型: %d\n", i + 1, struRecordCfg.struRecAllDay[i].byRecordType == 0 ? "否" : "是");
+    printf("星期[%d]是否全天录像: %s, 录像类型: %d\n",
+      i + 1,
+      struRecordCfg.struRecAllDay[i].byAllDayRecord == 0 ? "否" : "是",
+      struRecordCfg.struRecAllDay[i].byRecordType
+    );
   }
   NET_DVR_Logout_V30(lUserID);
   NET_DVR_Cleanup();

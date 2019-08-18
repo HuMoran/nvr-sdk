@@ -16,6 +16,15 @@
 #include <time.h>
 #include "../include/HCNetSDK.h"
 
+void cb(
+  DWORD    dwType,
+  void     *lpBuffer,
+  DWORD    dwBufLen,
+  void     *pUserData
+) {
+  return;
+}
+
 int main(int argc, char *argv[]) {
   if (argc < 5) {
     printf("please run hk-nvr as:\n");
@@ -49,36 +58,40 @@ int main(int argc, char *argv[]) {
   // 有些设备不支持此功能
   NET_DVR_RECORD_CHECK_COND struRecordCheckCond = {0};
   struRecordCheckCond.byCheckType = 1; // 检测录像是否完整&缺失录像的起止时间
-  struRecordCheckCond.struStreamInfo.dwChannel = 1; // 通道号写死
+  struRecordCheckCond.struStreamInfo.dwChannel = 33; // 通道号写死
+  struRecordCheckCond.struStreamInfo.dwSize = sizeof(struRecordCheckCond.struStreamInfo);
   time_t t;
   time_t yesterday;
   struct tm * lt;
+  struct tm * ly;
   time(&t); //获取Unix时间戳。
   yesterday = t - 86400;
   lt = localtime(&t);//转为时间结构。
-  ly = localtime(&yesterady);//转为时间结构。
+  ly = localtime(&yesterday);//转为时间结构。
   struRecordCheckCond.struBeginTime.wYear = ly->tm_year + 1900;
   struRecordCheckCond.struBeginTime.byMonth = ly->tm_mon;
   struRecordCheckCond.struBeginTime.byDay = ly->tm_mday;
   struRecordCheckCond.struEndTime.wYear = lt->tm_year + 1900;
   struRecordCheckCond.struEndTime.byMonth = lt->tm_mon;
   struRecordCheckCond.struEndTime.byDay = lt->tm_mday;
+  struRecordCheckCond.dwSize = sizeof(struRecordCheckCond);
+  LPVOID pUserData;
   int lHandle = NET_DVR_StartRemoteConfig(
     lUserID,
     NET_DVR_RECORD_CHECK,
-    struRecordCheckCond,
+    &struRecordCheckCond,
     sizeof(NET_DVR_RECORD_CHECK_COND),
-    NULL,
-    NULL);
-  if (lHandle === -1) {
+    cb,
+    pUserData);
+  if (lHandle == -1) {
     printf("Get NET_DVR_StartRemoteConfig error:%d\n", NET_DVR_GetLastError());
     NET_DVR_Logout_V30(lUserID);
     NET_DVR_Cleanup();
     return -1;
   }
   NET_DVR_RECORD_CHECK_RET struRecordCheckRet = {0};
-  int iRet = NET_DVR_GetNextRemoteConfig(lHandle, struRecordCheckRet, sizeof(NET_DVR_RECOMMEN_VERSION_RET));
-  if (iRet === -1) {
+  int iRet = NET_DVR_GetNextRemoteConfig(lHandle, &struRecordCheckRet, sizeof(NET_DVR_RECOMMEN_VERSION_RET));
+  if (iRet == -1) {
     printf("Get NET_DVR_GetNextRemoteConfig error:%d\n", NET_DVR_GetLastError());
     NET_DVR_StopRemoteConfig(lHandle);
     NET_DVR_Logout_V30(lUserID);
