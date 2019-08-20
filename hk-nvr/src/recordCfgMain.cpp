@@ -81,11 +81,10 @@ IP_CHAN_INFO *getChannelInfo(LONG lUserID, int iGroupNO)
     return struIPChanInfo;
 }
 
-int login(char *ip, int port, char *username, char *password)
+int login(char *ip, int port, char *username, char *password, NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
 {
   //Login device
   NET_DVR_USER_LOGIN_INFO struLoginInfo = {0};
-  NET_DVR_DEVICEINFO_V40 struDeviceInfoV40 = {0};
   struLoginInfo.bUseAsynLogin = false;
   struLoginInfo.wPort = port;
   memcpy(struLoginInfo.sDeviceAddress, ip, NET_DVR_DEV_ADDRESS_MAX_LEN);
@@ -99,7 +98,7 @@ int login(char *ip, int port, char *username, char *password)
     NET_DVR_Cleanup();
     return -1;
   }
-  return 0;
+  return lUserID;
 }
 
 int main(int argc, char *argv[])
@@ -110,7 +109,7 @@ int main(int argc, char *argv[])
     printf("./hk-nvr ip port username password\n");
     return -1;
   }
-  int iRet, iGroupSum;
+  int iRet, iGroupSum, lUserID;
   char *ip = argv[1];
   int port = atoi(argv[2]);
   char *username = argv[3];
@@ -119,9 +118,9 @@ int main(int argc, char *argv[])
   NET_DVR_Init();
   // log init
   NET_DVR_SetLogToFile(3, "./diskLog");
-  iRet = login(ip, port, username, password);
-  if (0 != iRet)
-    return -1;
+  NET_DVR_DEVICEINFO_V40 struDeviceInfoV40 = {0};
+  lUserID = login(ip, port, username, password, struDeviceInfoV40);
+  if (-1 == lUserID) return -1;
 
   // 数字通道个数，高8位*256+低8位
   int iIPChanNum = struDeviceInfoV40.struDeviceV30.byHighDChanNum * 256 + struDeviceInfoV40.struDeviceV30.byIPChanNum;
@@ -145,7 +144,7 @@ int main(int argc, char *argv[])
 
   NET_DVR_RECORD_V40 struRecordCfg = {0};
   DWORD uiReturnLen;
-  int iRet = NET_DVR_GetDVRConfig(
+  iRet = NET_DVR_GetDVRConfig(
       lUserID,
       NET_DVR_GET_RECORDCFG_V40,
       34,
