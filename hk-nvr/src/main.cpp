@@ -13,12 +13,30 @@
 #include <string.h>
 #include "../include/HCNetSDK.h"
 
-int login(char *ip, int port, char *username, char *password)
+typedef struct
 {
-  //Login device
-  NET_DVR_USER_LOGIN_INFO struLoginInfo = {1};
-  NET_DVR_DEVICEINFO_V40 struDeviceInfoV40 = {0};
-  struLoginInfo.bUseAsynLogin = false;
+  int diskNum;     // 硬盘个数
+  int DVRType;     // 设备类型
+  int chanNum;     // 模拟通道个数
+  int chanStart;   // 模拟通道起始号
+  int IPChanNum;      // 数字通道最大支持个数
+  int IPChanStart; // 数字通道起始号
+} DVR_BASE_INFO;
+
+typedef struct
+{
+    unsigned int iGroupNO;  // 组号
+    unsigned int iNO;       //通道号
+    unsigned char byEnable; // 通道对应的设备状态 0：offline 1：online
+    unsigned int IdevID;    // 设备ID
+    char sIpV4[16];
+    unsigned char sIPV6[128];
+} IP_CHAN_INFO;
+
+int login(char *ip, int port, char *username, char *password, NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
+{
+  NET_DVR_USER_LOGIN_INFO struLoginInfo = {0};
+  // struLoginInfo.bUseAsynLogin = false;
   struLoginInfo.wPort = port;
   memcpy(struLoginInfo.sDeviceAddress, ip, NET_DVR_DEV_ADDRESS_MAX_LEN);
   memcpy(struLoginInfo.sUserName, username, NAME_LEN);
@@ -31,7 +49,149 @@ int login(char *ip, int port, char *username, char *password)
     NET_DVR_Cleanup();
     return -1;
   }
+  return lUserID;
+}
+
+DVR_BASE_INFO getBaseInfo(NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
+{
+  DVR_BASE_INFO struDVRBaseInfo = {0};
+  struDVRBaseInfo.diskNum = struDeviceInfoV40.struDeviceV30.byDiskNum;
+  struDVRBaseInfo.DVRType = struDeviceInfoV40.struDeviceV30.byDVRType;
+
+  struDVRBaseInfo.chanNum;
+  struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byDiskNum;
+
+  // 数字通道个数，高8位*256+低8位
+  struDVRBaseInfo.IPChanNum = struDeviceInfoV40.struDeviceV30.byHighDChanNum * 256
+    + struDeviceInfoV40.struDeviceV30.byIPChanNum;
+  // 数字通道起始通道号, 0表示无通道
+  struDVRBaseInfo.IPChanStart = struDeviceInfoV40.struDeviceV30.byStartDChan;
+  // 模拟通道个数
+  struDVRBaseInfo.chanNum = struDeviceInfoV40.struDeviceV30.byChanNum;
+  // 模拟通道起始通道号, 从1开始
+  struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byStartChan;
+
+  printf("硬盘个数:%d\n", struDVRBaseInfo.diskNum);
+  printf("设备类型:%d\n", struDVRBaseInfo.DVRType);
+  printf("模拟通道个数:%d, 模拟通道起始通道号:%d\n", struDVRBaseInfo.chanNum, struDVRBaseInfo.chanStart);
+  printf("数字通道最大支持个数:%d, 数字通道起始通道号:%d\n", struDVRBaseInfo.IPChanNum, struDVRBaseInfo.IPChanStart);
+  return struDVRBaseInfo;
+}
+
+int getDiskInfo(LONG lUserID)
+{
+  NET_DVR_HDCFG struDevConfig = {0};
+  DWORD uiReturnLen;
+  int iRet = NET_DVR_GetDVRConfig(
+    lUserID,
+    NET_DVR_GET_HDCFG,
+    0xFFFFFFFF,
+    &struDevConfig,
+    sizeof(NET_DVR_HDCFG),
+    &uiReturnLen
+  );
+  if (!iRet) {
+    printf("Get NET_DVR_GetDVRConfig error:%d\n", NET_DVR_GetLastError());
+    NET_DVR_Logout_V30(lUserID);
+    NET_DVR_Cleanup();
+    return -1;
+  }
+  printf("HDCount: %d\n", struDevConfig.dwHDCount);
+  for(int i = 0; i < (int)struDevConfig.dwHDCount; i++) {
+    printf("No: %d, Capacity: %d, FreeSpace: %d, Status: %d, Type: %d, GRoup: %d\n",
+      struDevConfig.struHDInfo[i].dwHDNo,
+      struDevConfig.struHDInfo[i].dwCapacity,
+      struDevConfig.struHDInfo[i].dwFreeSpace,
+      struDevConfig.struHDInfo[i].dwHdStatus,
+      struDevConfig.struHDInfo[i].byHDType,
+      struDevConfig.struHDInfo[i].dwHdGroup
+    );
+  }
   return 0;
+}
+
+IP_CHAN_INFO *getChannelInfo(LONG lUserID, int iGroupNO)
+{
+    //获取IP通道参数信息
+    NET_DVR_IPPARACFG_V40 IPAccessCfgV40 = {0};
+    DWORD dwReturned = 0;
+    BYTE byEnable, byIPID, byIPIDHigh;
+    int iDevInfoIndex;
+
+    int iRet = NET_DVR_GetDVRConfig(
+        lUserID,
+        NET_DVR_GET_IPPARACFG_V40,
+        iGroupNO,
+        &IPAccessCfgV40,
+        sizeof(NET_DVR_IPPARACFG_V40),
+        &dwReturned);
+    if (!iRet)
+    {
+        printf("NET_DVR_GET_IPPARACFG_V40 error, %d\n", NET_DVR_GetLastError());
+        return NULL;
+    }
+    int dwDChanNum = IPAccessCfgV40.dwDChanNum;
+    printf("数字通道个数: %d\n", dwDChanNum);
+    if (0 == dwDChanNum)
+        return NULL;
+
+    IP_CHAN_INFO struIPChanInfo[dwDChanNum] = {0};
+
+    for (int i = 0; i < dwDChanNum; i++)
+    {
+        switch (IPAccessCfgV40.struStreamMode[i].byGetStreamType)
+        {
+        case 0: //直接从设备取流
+            if (IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byEnable)
+            {
+                byEnable = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byEnable;
+                byIPID = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPID;
+                byIPIDHigh = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPIDHigh;
+                iDevInfoIndex = byIPIDHigh * 256 + byIPID - 1 - iGroupNO * 64;
+                struIPChanInfo[i].iGroupNO = 0;
+                struIPChanInfo[i].iNO = i + 1;
+                struIPChanInfo[i].byEnable = byEnable;
+                memcpy(struIPChanInfo[i].sIpV4, IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4, 16);
+                printf("IP channel no.%d is %s, IP: %s\n",
+                      i + 1,
+                      byEnable == 0 ? "offline" : "online",
+                      // IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.byEnable,
+                      IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4);
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    return struIPChanInfo;
+}
+
+int getRecordCfg(LONG lUserID)
+{
+  NET_DVR_RECORD_V40 struRecordCfg = {0};
+  DWORD uiReturnLen;
+  int iRet = NET_DVR_GetDVRConfig(
+      lUserID,
+      NET_DVR_GET_RECORDCFG_V40,
+      34,
+      &struRecordCfg,
+      sizeof(NET_DVR_RECORD_V40),
+      &uiReturnLen);
+  if (!iRet)
+  {
+    printf("Get NET_DVR_GetDVRConfig error:%d\n", NET_DVR_GetLastError());
+    NET_DVR_Logout_V30(lUserID);
+    NET_DVR_Cleanup();
+    return -1;
+  }
+  printf("是否启用计划录像配置: %s\n", struRecordCfg.dwRecord == 0 ? "否" : "是");
+  for (int i = 0; i < 7; i++)
+  {
+    printf("星期[%d]是否全天录像: %s, 录像类型: %d\n",
+           i + 1,
+           struRecordCfg.struRecAllDay[i].byAllDayRecord == 0 ? "否" : "是",
+           struRecordCfg.struRecAllDay[i].byRecordType);
+  }
 }
 
 int main(int argc, char *argv[])
@@ -41,7 +201,7 @@ int main(int argc, char *argv[])
     printf("please run hk-nvr as:\n ./hk-nvr ip port username password\n");
     return -1;
   }
-  int iRet, iGroupSum;
+  int iRet, iGroupSum, lUserID;
   char *ip = argv[1];
   int port = atoi(argv[2]);
   char *username = argv[3];
@@ -50,7 +210,39 @@ int main(int argc, char *argv[])
   NET_DVR_Init();
   // log init
   NET_DVR_SetLogToFile(3, "./diskLog");
-  iRet = login(ip, port, username, password);
-  if (0 != iRet)
-    return -1;
+  // login
+  NET_DVR_DEVICEINFO_V40 struDeviceInfoV40 = {0};
+  lUserID = login(ip, port, username, password, struDeviceInfoV40);
+  if (-1 == lUserID) return -1;
+
+  // 获取设备基本信息
+  DVR_BASE_INFO struDVRBaseInfo;
+  struDVRBaseInfo = getBaseInfo(struDeviceInfoV40);
+  // 获取硬盘信息
+  getDiskInfo(lUserID);
+  // 获取通道信息
+  // 计算组数量
+  iGroupSum = struDVRBaseInfo.IPChanNum / 64;
+  IP_CHAN_INFO *lpIPChanInfo[iGroupSum];
+  for (int i = 0; i <= iGroupSum; i++)
+  {
+    lpIPChanInfo[i] = getChannelInfo(lUserID, i);
+  }
+  // 设备抓图
+  NET_DVR_JPEGPARA lpJpegPara = {0};
+  lpJpegPara.wPicSize = 0xff;
+  lpJpegPara.wPicQuality = 2; // 图片质量，0：最好，1：较好，2：一般
+  for (int i = 0; i <= struDVRBaseInfo.IPChanNum; i ++) {
+    char str[25] = {0};
+    itoa(i, str, 10);
+    char *filename = strcat(str, ".jpg");
+    NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
+  }
+
+  // 获取录像计划
+  getRecordCfg(lUserID);
+
+  NET_DVR_Logout_V30(lUserID);
+  NET_DVR_Cleanup();
+  return 0;
 }
