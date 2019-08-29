@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "../include/HCNetSDK.h"
 
 typedef struct
@@ -33,7 +34,7 @@ typedef struct
     unsigned char sIPV6[128];
 } IP_CHAN_INFO;
 
-int login(char *ip, int port, char *username, char *password, NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
+int login(char *ip, int port, char *username, char *password, LPNET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
 {
   NET_DVR_USER_LOGIN_INFO struLoginInfo = {0};
   // struLoginInfo.bUseAsynLogin = false;
@@ -42,7 +43,7 @@ int login(char *ip, int port, char *username, char *password, NET_DVR_DEVICEINFO
   memcpy(struLoginInfo.sUserName, username, NAME_LEN);
   memcpy(struLoginInfo.sPassword, password, NAME_LEN);
 
-  int lUserID = NET_DVR_Login_V40(&struLoginInfo, &struDeviceInfoV40);
+  int lUserID = NET_DVR_Login_V40(&struLoginInfo, struDeviceInfoV40);
   if (lUserID < 0)
   {
     printf("Login error, %d\n", NET_DVR_GetLastError());
@@ -55,8 +56,9 @@ int login(char *ip, int port, char *username, char *password, NET_DVR_DEVICEINFO
 DVR_BASE_INFO getBaseInfo(NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
 {
   DVR_BASE_INFO struDVRBaseInfo = {0};
+
   struDVRBaseInfo.diskNum = struDeviceInfoV40.struDeviceV30.byDiskNum;
-  struDVRBaseInfo.DVRType = struDeviceInfoV40.struDeviceV30.byDVRType;
+  struDVRBaseInfo.DVRType = struDeviceInfoV40.struDeviceV30.wDevType;
 
   struDVRBaseInfo.chanNum;
   struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byDiskNum;
@@ -96,7 +98,7 @@ int getDiskInfo(LONG lUserID)
     NET_DVR_Cleanup();
     return -1;
   }
-  printf("HDCount: %d\n", struDevConfig.dwHDCount);
+  printf("硬盘个数: %d\n", struDevConfig.dwHDCount);
   for(int i = 0; i < (int)struDevConfig.dwHDCount; i++) {
     printf("No: %d, Capacity: %d, FreeSpace: %d, Status: %d, Type: %d, GRoup: %d\n",
       struDevConfig.struHDInfo[i].dwHDNo,
@@ -209,10 +211,10 @@ int main(int argc, char *argv[])
   // sdk init
   NET_DVR_Init();
   // log init
-  NET_DVR_SetLogToFile(3, "./diskLog");
+  NET_DVR_SetLogToFile(0, "./log");
   // login
   NET_DVR_DEVICEINFO_V40 struDeviceInfoV40 = {0};
-  lUserID = login(ip, port, username, password, struDeviceInfoV40);
+  lUserID = login(ip, port, username, password, &struDeviceInfoV40);
   if (-1 == lUserID) return -1;
 
   // 获取设备基本信息
@@ -232,15 +234,113 @@ int main(int argc, char *argv[])
   NET_DVR_JPEGPARA lpJpegPara = {0};
   lpJpegPara.wPicSize = 0xff;
   lpJpegPara.wPicQuality = 2; // 图片质量，0：最好，1：较好，2：一般
-  for (int i = 0; i <= struDVRBaseInfo.IPChanNum; i ++) {
+  for (int i = 0; i <= struDVRBaseInfo.IPChanNum; i++) {
     char str[25] = {0};
-    itoa(i, str, 10);
+    snprintf(str, sizeof(i), "%d", i);
     char *filename = strcat(str, ".jpg");
-    NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
+    int iRet = NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
+    // printf("文件名：%s，返回值：%d， 错误码：%d\n", filename, iRet, NET_DVR_GetLastError());
   }
 
   // 获取录像计划
   getRecordCfg(lUserID);
+
+  // 查找录像文件
+  NET_DVR_FILECOND_V40 pFindCond = {0};
+  NET_DVR_TIME startTime = {
+    dwYear: 2019,
+    dwMonth: 8,
+    dwDay: 16,
+  };
+  NET_DVR_TIME endTime = {
+    dwYear: 2019,
+    dwMonth: 8,
+    dwDay: 17,
+  };
+  pFindCond.lChannel = 34;
+  pFindCond.dwFileType = 0;
+  pFindCond.dwIsLocked = 0xff;
+  pFindCond.struStartTime.dwYear = 2019;
+  pFindCond.struStartTime.dwMonth = 1;
+  pFindCond.struStartTime.dwDay = 1;
+  pFindCond.struStopTime.dwYear = 2019;
+  pFindCond.struStopTime.dwMonth = 12;
+  pFindCond.struStopTime.dwDay = 30;
+
+  int lFindHandle = NET_DVR_FindFile_V40(lUserID, &pFindCond);
+  if (-1 == lFindHandle) {
+    NET_DVR_Logout_V30(lUserID);
+    NET_DVR_Cleanup();
+    return -1;
+  }
+  NET_DVR_FINDDATA_V40 lpFindData[4000] = {0};
+  int count = 0;
+  while(true)
+  {
+    iRet = NET_DVR_FindNextFile_V40(lFindHandle, &lpFindData[count]);
+    // printf("返回值：%d， 错误码：%d\n", iRet, NET_DVR_GetLastError());
+    if (-1 == iRet) {
+      NET_DVR_Logout_V30(lUserID);
+      NET_DVR_Cleanup();
+      return -1;
+    }
+    if (iRet == NET_DVR_ISFINDING)
+    {
+      sleep(1);
+      continue;
+    }
+    if (iRet == NET_DVR_FILE_SUCCESS)
+    {
+      count += 1;
+      continue;
+    }
+    break;
+  }
+  for (int i = 0; i < count; i++)
+  {
+    printf("文件名：%s, 大小：%dM ", lpFindData[i].sFileName, lpFindData[i].dwFileSize / (1024 * 1024));
+    printf("开始时间：%d/%d %d:%d:%d，结束时间：%d/%d %d:%d:%d\n",
+      lpFindData[i].struStartTime.dwMonth,
+      lpFindData[i].struStartTime.dwDay,
+      lpFindData[i].struStartTime.dwHour,
+      lpFindData[i].struStartTime.dwMinute,
+      lpFindData[i].struStartTime.dwSecond,
+      lpFindData[i].struStopTime.dwMonth,
+      lpFindData[i].struStopTime.dwDay,
+      lpFindData[i].struStopTime.dwHour,
+      lpFindData[i].struStopTime.dwMinute,
+      lpFindData[i].struStopTime.dwSecond
+    );
+  }
+  NET_DVR_FindClose_V30(lFindHandle);
+
+  NET_DVR_MRD_SEARCH_PARAM lpInBuffer[1] = {0};
+  lpInBuffer[0].dwSize = sizeof(NET_DVR_MRD_SEARCH_PARAM);
+  lpInBuffer[0].struStreamInfo.dwSize = sizeof(NET_DVR_STREAM_INFO);
+  lpInBuffer[0].struStreamInfo.dwChannel = 33;
+  lpInBuffer[0].wYear = 2019;
+  int month = 8;
+  lpInBuffer[0].byMonth = month;
+
+  int lpStatusList[2] = {0};
+  NET_DVR_MRD_SEARCH_RESULT lpOutBuffer[1] = {0};
+  int dwOutBufferSize = sizeof(NET_DVR_MRD_SEARCH_RESULT) * 1;
+
+  iRet = NET_DVR_GetDeviceConfig(
+    lUserID,
+    NET_DVR_GET_MONTHLY_RECORD_DISTRIBUTION,
+    0,
+    lpInBuffer,
+    sizeof(NET_DVR_MRD_SEARCH_PARAM) * 1,
+    lpStatusList,
+    lpOutBuffer,
+    dwOutBufferSize
+  );
+  printf("返回值：%d， 错误码：%d %d %d\n", iRet, NET_DVR_GetLastError(), lpStatusList[0], lpStatusList[1]);
+  // for (int i = 0; i < 30; i++) {
+  //   printf("%d月%d号：%d\n", month, i + 1, lpOutBuffer[0].byHasEventRecode[i]);
+  //   printf("%d月%d号事件录像：%d\n", month, i + 1, lpOutBuffer[0].byHasEventRecode[i]);
+  // }
 
   NET_DVR_Logout_V30(lUserID);
   NET_DVR_Cleanup();
