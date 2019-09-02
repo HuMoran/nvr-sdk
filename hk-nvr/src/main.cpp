@@ -20,9 +20,20 @@ typedef struct
   int DVRType;     // 设备类型
   int chanNum;     // 模拟通道个数
   int chanStart;   // 模拟通道起始号
-  int IPChanNum;      // 数字通道最大支持个数
+  int IPChanNum;   // 数字通道最大支持个数
   int IPChanStart; // 数字通道起始号
 } DVR_BASE_INFO;
+
+typedef struct
+{
+  int no;
+  unsigned int capacity;
+  unsigned int freeSpace;
+  short status;
+  short type;
+  short group;
+} DISK_INFO;
+
 
 typedef struct
 {
@@ -73,14 +84,10 @@ DVR_BASE_INFO getBaseInfo(NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
   // 模拟通道起始通道号, 从1开始
   struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byStartChan;
 
-  printf("硬盘个数:%d\n", struDVRBaseInfo.diskNum);
-  printf("设备类型:%d\n", struDVRBaseInfo.DVRType);
-  printf("模拟通道个数:%d, 模拟通道起始通道号:%d\n", struDVRBaseInfo.chanNum, struDVRBaseInfo.chanStart);
-  printf("数字通道最大支持个数:%d, 数字通道起始通道号:%d\n", struDVRBaseInfo.IPChanNum, struDVRBaseInfo.IPChanStart);
   return struDVRBaseInfo;
 }
 
-int getDiskInfo(LONG lUserID)
+int getDiskInfo(LONG lUserID, DISK_INFO *struDisk)
 {
   NET_DVR_HDCFG struDevConfig = {0};
   DWORD uiReturnLen;
@@ -98,40 +105,43 @@ int getDiskInfo(LONG lUserID)
     NET_DVR_Cleanup();
     return -1;
   }
-  printf("硬盘个数: %d\n", struDevConfig.dwHDCount);
-  for(int i = 0; i < (int)struDevConfig.dwHDCount; i++) {
-    printf("No: %d, Capacity: %d, FreeSpace: %d, Status: %d, Type: %d, GRoup: %d\n",
-      struDevConfig.struHDInfo[i].dwHDNo,
-      struDevConfig.struHDInfo[i].dwCapacity,
-      struDevConfig.struHDInfo[i].dwFreeSpace,
-      struDevConfig.struHDInfo[i].dwHdStatus,
-      struDevConfig.struHDInfo[i].byHDType,
-      struDevConfig.struHDInfo[i].dwHdGroup
-    );
+  int diskNum = struDevConfig.dwHDCount;
+  if (diskNum <= 0) {
+    return 0;
   }
+  for(int i = 0; i < diskNum; i++)
+  {
+    struDisk[i].no = struDevConfig.struHDInfo[i].dwHDNo;
+    struDisk[i].capacity = struDevConfig.struHDInfo[i].dwCapacity;
+    struDisk[i].freeSpace = struDevConfig.struHDInfo[i].dwFreeSpace;
+    struDisk[i].status = struDevConfig.struHDInfo[i].dwHdStatus;
+    struDisk[i].type = struDevConfig.struHDInfo[i].byHDType;
+    struDisk[i].group = struDevConfig.struHDInfo[i].dwHdGroup;
+  }
+
   return 0;
 }
 
-IP_CHAN_INFO *getChannelInfo(LONG lUserID, int iGroupNO)
+int getChannelInfo(LONG lUserID, int iGroupNO, NET_DVR_IPPARACFG_V40 *IPAccessCfgV40)
 {
     //获取IP通道参数信息
-    NET_DVR_IPPARACFG_V40 IPAccessCfgV40 = {0};
+    // NET_DVR_IPPARACFG_V40 IPAccessCfgV40 = {0};
     DWORD dwReturned = 0;
-    BYTE byEnable, byIPID, byIPIDHigh;
-    int iDevInfoIndex;
 
     int iRet = NET_DVR_GetDVRConfig(
         lUserID,
         NET_DVR_GET_IPPARACFG_V40,
         iGroupNO,
-        &IPAccessCfgV40,
+        IPAccessCfgV40,
         sizeof(NET_DVR_IPPARACFG_V40),
         &dwReturned);
     if (!iRet)
     {
         printf("NET_DVR_GET_IPPARACFG_V40 error, %d\n", NET_DVR_GetLastError());
-        return NULL;
+        return -1;
     }
+    return 0;
+    #if 0
     int dwDChanNum = IPAccessCfgV40.dwDChanNum;
     printf("数字通道个数: %d\n", dwDChanNum);
     if (0 == dwDChanNum)
@@ -165,7 +175,8 @@ IP_CHAN_INFO *getChannelInfo(LONG lUserID, int iGroupNO)
             break;
         }
     }
-    return struIPChanInfo;
+    return 0;
+    #endif
 }
 
 int getRecordCfg(LONG lUserID)
@@ -196,6 +207,47 @@ int getRecordCfg(LONG lUserID)
   }
 }
 
+void printChansInfo(NET_DVR_IPPARACFG_V40 IPAccessCfgV40) {
+    BYTE byEnable, byIPID, byIPIDHigh;
+    int iDevInfoIndex;
+    int dwDChanNum = IPAccessCfgV40.dwDChanNum;
+    // printf("数字通道个数: %d\n", dwDChanNum);
+    if (0 == dwDChanNum) return;
+
+    IP_CHAN_INFO struIPChanInfo[dwDChanNum] = {0};
+    for (int i = 0; i < dwDChanNum; i++)
+    {
+        switch (IPAccessCfgV40.struStreamMode[i].byGetStreamType)
+        {
+        case 0: //直接从设备取流
+            if (IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byEnable)
+            {
+                byEnable = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byEnable;
+                byIPID = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPID;
+                byIPIDHigh = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPIDHigh;
+                iDevInfoIndex = byIPIDHigh * 256 + byIPID - 1 - i * 64;
+                struIPChanInfo[i].iGroupNO = 0;
+                struIPChanInfo[i].iNO = i + 1;
+                struIPChanInfo[i].byEnable = byEnable;
+                memcpy(struIPChanInfo[i].sIpV4, IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4, 16);
+                printf("{\n");
+                printf("\"no\": %d,\n", i + 1);
+                printf("\"isOnline\": %d,\n", byEnable);
+                printf("\"ip\": \"%s\",\n", IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4);
+                printf("}\n");
+                // printf("IP channel no.%d is %s, IP: %s\n",
+                      // i + 1,
+                      // byEnable == 0 ? "offline" : "online",
+                      // IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.byEnable,
+                      // IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4);
+            }
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
   if (argc < 5)
@@ -220,15 +272,39 @@ int main(int argc, char *argv[])
   // 获取设备基本信息
   DVR_BASE_INFO struDVRBaseInfo;
   struDVRBaseInfo = getBaseInfo(struDeviceInfoV40);
+  printf("{\n");
+  printf("\"devType\": %d,\n", struDVRBaseInfo.DVRType);
+  printf("\"diskNum\": %d,\n", struDVRBaseInfo.diskNum);
+  printf("\"chanMax\": %d, \n", struDVRBaseInfo.chanNum, struDVRBaseInfo.chanStart);
+  printf("\"IPChanMax\": %d,\n", struDVRBaseInfo.IPChanNum, struDVRBaseInfo.IPChanStart);
   // 获取硬盘信息
-  getDiskInfo(lUserID);
+  if (struDVRBaseInfo.diskNum > 0) {
+    DISK_INFO struDisk[struDVRBaseInfo.diskNum] = {0};
+    getDiskInfo(lUserID, struDisk);
+    printf("\"disks\":[\n");
+    for (int i = 0; i < struDVRBaseInfo.diskNum; i++)
+    {
+      printf("{\n");
+      printf("\"no\": %d,\n", struDisk[i].no);
+      printf("\"capacity\": %d,\n", struDisk[i].capacity);
+      printf("\"freeSpace\": %d,\n", struDisk[i].freeSpace);
+      printf("\"status\": %d,\n", struDisk[i].status);
+      printf("\"type\": %d,\n", struDisk[i].type);
+      printf("\"group\": %d,\n", struDisk[i].group);
+      printf("}\n");
+    }
+    printf("]\n");
+  }
   // 获取通道信息
   // 计算组数量
   iGroupSum = struDVRBaseInfo.IPChanNum / 64;
   IP_CHAN_INFO *lpIPChanInfo[iGroupSum];
   for (int i = 0; i <= iGroupSum; i++)
   {
-    lpIPChanInfo[i] = getChannelInfo(lUserID, i);
+    NET_DVR_IPPARACFG_V40 IPAccessCfgV40 = {0};
+    // lpIPChanInfo[i] = getChannelInfo(lUserID, i);
+    getChannelInfo(lUserID, i, &IPAccessCfgV40);
+    printChansInfo(IPAccessCfgV40);
   }
   // 设备抓图
   NET_DVR_JPEGPARA lpJpegPara = {0};
