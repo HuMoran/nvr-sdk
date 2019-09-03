@@ -71,8 +71,8 @@ DVR_BASE_INFO getBaseInfo(NET_DVR_DEVICEINFO_V40 struDeviceInfoV40)
   struDVRBaseInfo.diskNum = struDeviceInfoV40.struDeviceV30.byDiskNum;
   struDVRBaseInfo.DVRType = struDeviceInfoV40.struDeviceV30.wDevType;
 
-  struDVRBaseInfo.chanNum;
-  struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byDiskNum;
+  struDVRBaseInfo.chanNum = struDeviceInfoV40.struDeviceV30.byChanNum;
+  struDVRBaseInfo.chanStart = struDeviceInfoV40.struDeviceV30.byStartChan;
 
   // 数字通道个数，高8位*256+低8位
   struDVRBaseInfo.IPChanNum = struDeviceInfoV40.struDeviceV30.byHighDChanNum * 256
@@ -197,46 +197,63 @@ int getRecordCfg(LONG lUserID, LONG lChannel)
     NET_DVR_Cleanup();
     return -1;
   }
-
-  printf("{\n");
-  printf("\"chanNo\": %d\n", lChannel);
-  printf("\"isRecord\": %s\n", struRecordCfg.dwRecord == 0 ? "false" : "true");
+  printf("\"chanNo\": %d,\n", lChannel);
+  printf("\"isRecord\": %s,\n", struRecordCfg.dwRecord == 0 ? "false" : "true");
   printf("\"details\": [\n");
   // printf("是否启用计划录像配置: %s\n", struRecordCfg.dwRecord == 0 ? "否" : "是");
   for (int i = 0; i < MAX_DAYS; i++)
   {
     printf("{\n");
-    printf("\"isAllDayRecord\": %s\n", struRecordCfg.struRecAllDay[i].byAllDayRecord == 0 ? "false" : "true");
-    printf("\"allDayRecordType\": %d\n", struRecordCfg.struRecAllDay[i].byRecordType);
-    printf("\"recordSchedule\": [\n", struRecordCfg.struRecAllDay[i].byRecordType);
-    for (int j = 0; j < MAX_TIMESEGMENT_V30; j++)
+    printf("\"isAllDayRecord\": %s,\n", struRecordCfg.struRecAllDay[i].byAllDayRecord == 0 ? "false" : "true");
+    printf("\"allDayRecordType\": %d,\n", struRecordCfg.struRecAllDay[i].byRecordType);
+    if (struRecordCfg.struRecAllDay[i].byAllDayRecord == 0)
     {
-      printf("{\n");
-      printf("\"recordType\": %d\n", struRecordCfg.struRecordSched[i][j].byRecordType);
-      printf("\"startHour\": %d\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStartHour);
-      printf("\"startMin\": %d\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStartMin);
-      printf("\"stopHour\": %d\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStopHour);
-      printf("\"stopMin\": %d\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStopMin);
-      if (j == MAX_TIMESEGMENT_V30 - 1)
+      printf("\"recordSchedule\": [\n");
+      for (int j = 0; j < MAX_TIMESEGMENT_V30; j++)
       {
-        printf("}\n");
+        printf("{\n");
+        printf("\"recordType\": %d,\n", struRecordCfg.struRecordSched[i][j].byRecordType);
+        printf("\"startHour\": %d,\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStartHour);
+        printf("\"startMin\": %d,\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStartMin);
+        printf("\"stopHour\": %d,\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStopHour);
+        printf("\"stopMin\": %d\n", struRecordCfg.struRecordSched[i][j].struRecordTime.byStopMin);
+        if (j == MAX_TIMESEGMENT_V30 - 1)
+        {
+          printf("}\n");
+        } else {
+          printf("},\n");
+        }
+      }
+      if (i == MAX_DAYS - 1)
+      {
+        printf("]}\n");
       } else {
-        printf("},\n");
+        printf("]},\n");
+      }
+
+    } else {
+      if (i == MAX_DAYS - 1)
+      {
+        printf("\"recordSchedule\": []}\n");
+      } else {
+        printf("\"recordSchedule\": []},\n");
       }
     }
-    printf("]\n");
+
   }
-  printf("}\n");
+  printf("]\n");
+  return 0;
 }
 
-void printChansInfo(NET_DVR_IPPARACFG_V40 IPAccessCfgV40) {
+int printChansInfo(NET_DVR_IPPARACFG_V40 IPAccessCfgV40) {
     BYTE byEnable, byIPID, byIPIDHigh;
     int iDevInfoIndex;
     int dwDChanNum = IPAccessCfgV40.dwDChanNum;
     // printf("数字通道个数: %d\n", dwDChanNum);
-    if (0 == dwDChanNum) return;
+    if (0 == dwDChanNum) return -1;
 
     IP_CHAN_INFO struIPChanInfo[dwDChanNum] = {0};
+    int iChanNum = 0;
     for (int i = 0; i < dwDChanNum; i++)
     {
         switch (IPAccessCfgV40.struStreamMode[i].byGetStreamType)
@@ -247,27 +264,32 @@ void printChansInfo(NET_DVR_IPPARACFG_V40 IPAccessCfgV40) {
                 byEnable = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byEnable;
                 byIPID = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPID;
                 byIPIDHigh = IPAccessCfgV40.struStreamMode[i].uGetStream.struChanInfo.byIPIDHigh;
-                iDevInfoIndex = byIPIDHigh * 256 + byIPID - 1 - i * 64;
-                struIPChanInfo[i].iGroupNO = 0;
-                struIPChanInfo[i].iNO = i + 1;
-                struIPChanInfo[i].byEnable = byEnable;
-                memcpy(struIPChanInfo[i].sIpV4, IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4, 16);
-                printf("{\n");
-                printf("\"no\": %d,\n", i + 1);
-                printf("\"isOnline\": %d,\n", byEnable);
-                printf("\"ip\": \"%s\",\n", IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4);
-                printf("}\n");
-                // printf("IP channel no.%d is %s, IP: %s\n",
-                      // i + 1,
-                      // byEnable == 0 ? "offline" : "online",
-                      // IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.byEnable,
-                      // IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4);
+                // iDevInfoIndex = byIPIDHigh * 256 + byIPID - 1 - i * 64;
+                iDevInfoIndex = byIPIDHigh * 256 + byIPID - 1;
+                struIPChanInfo[iChanNum].iGroupNO = 0;
+                struIPChanInfo[iChanNum].iNO = i + 1;
+                struIPChanInfo[iChanNum].byEnable = byEnable;
+                memcpy(struIPChanInfo[iChanNum].sIpV4, IPAccessCfgV40.struIPDevInfo[iDevInfoIndex].struIP.sIpV4, 16);
+                iChanNum++;
             }
             break;
         default:
             break;
         }
     }
+    for (int i = 0; i < iChanNum; i++)
+    {
+      printf("{\n");
+      printf("\"no\": %d,\n", struIPChanInfo[i].iNO);
+      printf("\"isOnline\": %s,\n", struIPChanInfo[i].byEnable == 0 ? "false" : "true");
+      printf("\"ip\": \"%s\"\n", struIPChanInfo[i].sIpV4);
+      if (i == iChanNum - 1) {
+        printf("}\n");
+      } else {
+        printf("},\n");
+      }
+    }
+    return iChanNum;
 }
 
 int getRecordFile(LONG lUserID, LONG lChannel, NET_DVR_TIME struStartTime, NET_DVR_TIME struStopTime)
@@ -322,41 +344,59 @@ int getRecordFile(LONG lUserID, LONG lChannel, NET_DVR_TIME struStartTime, NET_D
     }
     break;
   }
+  printf("\"chanNo\": %d,\n", lChannel);
+  printf("\"startTime\": \"%d-%d-%d %d:%d:%d\",\n",
+    struStartTime.dwYear,
+    struStartTime.dwMonth,
+    struStartTime.dwDay,
+    struStartTime.dwHour,
+    struStartTime.dwMinute,
+    struStartTime.dwSecond
+  );
+  printf("\"stopTime\": \"%d-%d-%d %d:%d:%d\",\n",
+    struStopTime.dwYear,
+    struStopTime.dwMonth,
+    struStopTime.dwDay,
+    struStopTime.dwHour,
+    struStopTime.dwMinute,
+    struStopTime.dwSecond
+  );
+  printf("\"files\":[\n");
   for (int i = 0; i < count; i++)
   {
     printf("{\n");
-    printf("\"chanNo\": %d\n", lChannel);
-    printf("\"startTime\": \"%d-%d-%d %d:%d:%d\"\n",
-      struStartTime.dwYear,
-      struStartTime.dwMonth,
-      struStartTime.dwDay,
-      struStartTime.dwHour,
-      struStartTime.dwMinute,
-      struStartTime.dwSecond
-    );
-    printf("\"stopTime\": \"%d-%d-%d %d:%d:%d\"\n",
-      struStopTime.dwYear,
-      struStopTime.dwMonth,
-      struStopTime.dwDay,
-      struStopTime.dwHour,
-      struStopTime.dwMinute,
-      struStopTime.dwSecond
-    );
-    printf("文件名：%s, 大小：%dM ", lpFindData[i].sFileName, lpFindData[i].dwFileSize / (1024 * 1024));
-    printf("开始时间：%d/%d %d:%d:%d，结束时间：%d/%d %d:%d:%d\n",
-      lpFindData[i].struStartTime.dwMonth,
-      lpFindData[i].struStartTime.dwDay,
-      lpFindData[i].struStartTime.dwHour,
-      lpFindData[i].struStartTime.dwMinute,
-      lpFindData[i].struStartTime.dwSecond,
-      lpFindData[i].struStopTime.dwMonth,
-      lpFindData[i].struStopTime.dwDay,
-      lpFindData[i].struStopTime.dwHour,
-      lpFindData[i].struStopTime.dwMinute,
-      lpFindData[i].struStopTime.dwSecond
-    );
+    printf("\"filename\":\"%s\",\n", lpFindData[i].sFileName);
+    printf("\"size\":\"%d\"\n", lpFindData[i].dwFileSize);
+      // "filename": "ch0002_00000000002000300",
+      // "startTime": "2019-8-1 2:20:23",
+      // "stopTime": "2019-8-5 12:20:23",
+      // "size": 112213121,
+      // "fileType": 0, // 等同于recordType
+    if (i == count - 1)
+    {
+      printf("}\n");
+    } else
+    {
+      printf("},\n");
+    }
+
+    // printf("文件名：%s, 大小：%dM ", lpFindData[i].sFileName, lpFindData[i].dwFileSize / (1024 * 1024));
+    // printf("开始时间：%d/%d %d:%d:%d，结束时间：%d/%d %d:%d:%d\n",
+    //   lpFindData[i].struStartTime.dwMonth,
+    //   lpFindData[i].struStartTime.dwDay,
+    //   lpFindData[i].struStartTime.dwHour,
+    //   lpFindData[i].struStartTime.dwMinute,
+    //   lpFindData[i].struStartTime.dwSecond,
+    //   lpFindData[i].struStopTime.dwMonth,
+    //   lpFindData[i].struStopTime.dwDay,
+    //   lpFindData[i].struStopTime.dwHour,
+    //   lpFindData[i].struStopTime.dwMinute,
+    //   lpFindData[i].struStopTime.dwSecond
+    // );
   }
+  printf("]\n");
   NET_DVR_FindClose_V30(lFindHandle);
+  return 0;
 }
 
 int main(int argc, char *argv[])
@@ -366,7 +406,7 @@ int main(int argc, char *argv[])
     printf("please run hk-nvr as:\n ./hk-nvr ip port username password\n");
     return -1;
   }
-  int iRet, iGroupSum, lUserID;
+  int iGroupSum, lUserID;
   char *ip = argv[1];
   int port = atoi(argv[2]);
   char *username = argv[3];
@@ -386,8 +426,8 @@ int main(int argc, char *argv[])
   printf("{\n");
   printf("\"devType\": %d,\n", struDVRBaseInfo.DVRType);
   printf("\"diskNum\": %d,\n", struDVRBaseInfo.diskNum);
-  printf("\"chanMax\": %d, \n", struDVRBaseInfo.chanNum, struDVRBaseInfo.chanStart);
-  printf("\"IPChanMax\": %d,\n", struDVRBaseInfo.IPChanNum, struDVRBaseInfo.IPChanStart);
+  printf("\"chanMax\": %d, \n", struDVRBaseInfo.chanNum);
+  printf("\"IPChanMax\": %d,\n", struDVRBaseInfo.IPChanNum);
   // 获取硬盘信息
   if (struDVRBaseInfo.diskNum > 0) {
     DISK_INFO struDisk[struDVRBaseInfo.diskNum] = {0};
@@ -401,22 +441,27 @@ int main(int argc, char *argv[])
       printf("\"freeSpace\": %d,\n", struDisk[i].freeSpace);
       printf("\"status\": %d,\n", struDisk[i].status);
       printf("\"type\": %d,\n", struDisk[i].type);
-      printf("\"group\": %d,\n", struDisk[i].group);
-      printf("}\n");
+      printf("\"group\": %d\n", struDisk[i].group);
+      if (i == struDVRBaseInfo.diskNum - 1) {
+        printf("}\n");
+      } else {
+        printf("},\n");
+      }
     }
     printf("],\n");
   }
   // 获取通道信息
   // 计算组数量
   iGroupSum = struDVRBaseInfo.IPChanNum / 64;
-  IP_CHAN_INFO *lpIPChanInfo[iGroupSum];
+  int iChanNum = 0;
   for (int i = 0; i <= iGroupSum; i++)
   {
     NET_DVR_IPPARACFG_V40 IPAccessCfgV40 = {0};
     // lpIPChanInfo[i] = getChannelInfo(lUserID, i);
     getChannelInfo(lUserID, i, &IPAccessCfgV40);
     printf("\"IPChans\": [\n");
-    printChansInfo(IPAccessCfgV40);
+    int iRet = printChansInfo(IPAccessCfgV40);
+    iChanNum = iRet + iChanNum;
     printf("],\n");
   }
   // 设备抓图
@@ -427,40 +472,59 @@ int main(int argc, char *argv[])
     char str[25] = {0};
     snprintf(str, sizeof(i), "%d", i);
     char *filename = strcat(str, ".jpg");
-    int iRet = NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
+    NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
+    // int iRet = NET_DVR_CaptureJPEGPicture(lUserID, struDVRBaseInfo.IPChanStart + i, &lpJpegPara, filename);
     // printf("文件名：%s，返回值：%d， 错误码：%d\n", filename, iRet, NET_DVR_GetLastError());
   }
 
   // 获取录像计划
+
+  printf("\"recordCfg\": [\n");
   for (int i = 0; i < struDVRBaseInfo.IPChanNum; i++)
   {
-    getRecordCfg(lUserID, i);
+    printf("{\n");
+    getRecordCfg(lUserID, i + struDVRBaseInfo.IPChanStart);
+    if (i == struDVRBaseInfo.IPChanNum - 1)
+    {
+      printf("}\n");
+    } else
+    {
+      printf("},\n");
+    }
+
   }
+  printf("],\n");
 
   // 查找录像文件
   NET_DVR_TIME struStartTime = {
     dwYear: 2019,
-    dwMonth: 8,
-    dwDay: 16,
+    dwMonth: 9,
+    dwDay: 2,
     dwHour: 0,
     dwMinute: 0,
     dwSecond: 0
   };
   NET_DVR_TIME struStopTime = {
     dwYear: 2019,
-    dwMonth: 8,
-    dwDay: 17,
+    dwMonth: 9,
+    dwDay: 3,
     dwHour: 0,
     dwMinute: 0,
     dwSecond: 0
   };
   printf("\"records\":[\n");
-  for (int i = 0; i <= struDVRBaseInfo.IPChanNum; i++)
+  for (int i = 0; i < iChanNum; i++)
   {
-    getRecordFile(lUserID, i, struStartTime, struStopTime);
+    printf("{\n");
+    getRecordFile(lUserID, i + struDVRBaseInfo.IPChanStart, struStartTime, struStopTime);
+    if (i == iChanNum - 1)
+    {
+      printf("}\n");
+    } else {
+      printf("},\n");
+    }
   }
   printf("]\n");
-
   printf("}\n");
   NET_DVR_Logout_V30(lUserID);
   NET_DVR_Cleanup();
