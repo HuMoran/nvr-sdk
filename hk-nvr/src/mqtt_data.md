@@ -32,8 +32,9 @@
     "isRecord": true, // 是否启用录像
     "details": [{ // 分别记录周一到周日的录像配置情况
       "isAllDayRecord": false, // 是否全天录像
-      "recordType": 3, // 定义见后文recordType
+      "allDayRecordType": 3, // 全天录像的录像类型，定义见后文recordType
       "recordSchedule": [{  // 如果不是全天录像，则查看此数组，获取录像时间段配置，最多8组
+        "recordType": 3, // 录像类型，定义见后文recordType
         "startHour": 8,
         "startMin": 0,
         "stopHour": 12,
