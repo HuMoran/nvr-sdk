@@ -1,0 +1,2254 @@
+{
+  "devType": 2216,
+  "diskNum": 1,
+  "chanMax": 0,
+  "IPChanMax": 16,
+  "disks": [
+    {
+      "no": 0,
+      "capacity": 953869,
+      "freeSpace": 0,
+      "status": 0,
+      "type": 0,
+      "group": 1
+    }
+  ],
+  "IPChans": [
+    {
+      "no": 1,
+      "isOnline": true,
+      "ip": "192.168.1.108"
+    },
+    {
+      "no": 2,
+      "isOnline": true,
+      "ip": "192.168.1.200"
+    },
+    {
+      "no": 3,
+      "isOnline": true,
+      "ip": "192.168.0.106"
+    }
+  ],
+  "recordCfg": [
+    {
+      "chanNo": 33,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 0,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chanNo": 34,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        },
+        {
+          "isAllDayRecord": false,
+          "allDayRecordType": 3,
+          "recordSchedule": [
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 24,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            },
+            {
+              "recordType": 0,
+              "startHour": 0,
+              "startMin": 0,
+              "stopHour": 0,
+              "stopMin": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chanNo": 35,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 36,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 37,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 38,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 39,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 40,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 41,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 42,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 43,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 44,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 45,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 46,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 47,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    },
+    {
+      "chanNo": 48,
+      "isRecord": true,
+      "details": [
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        },
+        {
+          "isAllDayRecord": true,
+          "allDayRecordType": 0,
+          "recordSchedule": []
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "chanNo": 33,
+      "startTime": "2019-9-2 0:0:0",
+      "stopTime": "2019-9-3 0:0:0",
+      "files": [
+        {
+          "filename": "ch0001_00000000157000000",
+          "startTime": "2019-9-1 23:57:13",
+          "stopTime": "2019-9-2 1:6:29",
+          "size": 1065654512,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000161000000",
+          "startTime": "2019-9-2 1:6:29",
+          "stopTime": "2019-9-2 2:15:47",
+          "size": 1066166012,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000164000000",
+          "startTime": "2019-9-2 2:15:47",
+          "stopTime": "2019-9-2 3:25:5",
+          "size": 1066166148,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000168000000",
+          "startTime": "2019-9-2 3:25:5",
+          "stopTime": "2019-9-2 4:34:20",
+          "size": 1065649824,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000172000000",
+          "startTime": "2019-9-2 4:34:20",
+          "stopTime": "2019-9-2 5:43:38",
+          "size": 1066165328,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000176000000",
+          "startTime": "2019-9-2 5:43:38",
+          "stopTime": "2019-9-2 6:52:57",
+          "size": 1066196044,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000180000000",
+          "startTime": "2019-9-2 6:52:57",
+          "stopTime": "2019-9-2 8:2:15",
+          "size": 1066231176,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000184000000",
+          "startTime": "2019-9-2 8:2:15",
+          "stopTime": "2019-9-2 9:11:30",
+          "size": 1065689176,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000188000000",
+          "startTime": "2019-9-2 9:11:30",
+          "stopTime": "2019-9-2 10:20:46",
+          "size": 1065653676,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000192000000",
+          "startTime": "2019-9-2 10:20:46",
+          "stopTime": "2019-9-2 11:30:3",
+          "size": 1065659224,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000196000000",
+          "startTime": "2019-9-2 11:30:3",
+          "stopTime": "2019-9-2 12:39:20",
+          "size": 1066148904,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000199000000",
+          "startTime": "2019-9-2 12:39:20",
+          "stopTime": "2019-9-2 13:48:38",
+          "size": 1066215416,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000203000000",
+          "startTime": "2019-9-2 13:48:38",
+          "stopTime": "2019-9-2 14:57:56",
+          "size": 1066148180,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000207000000",
+          "startTime": "2019-9-2 14:57:56",
+          "stopTime": "2019-9-2 16:7:14",
+          "size": 1066174028,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000211000000",
+          "startTime": "2019-9-2 16:7:14",
+          "stopTime": "2019-9-2 17:16:30",
+          "size": 1065657232,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000215000000",
+          "startTime": "2019-9-2 17:16:30",
+          "stopTime": "2019-9-2 18:25:48",
+          "size": 1066166528,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000219000000",
+          "startTime": "2019-9-2 18:25:48",
+          "stopTime": "2019-9-2 19:35:4",
+          "size": 1065722252,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000224000000",
+          "startTime": "2019-9-2 19:35:4",
+          "stopTime": "2019-9-2 20:35:3",
+          "size": 922623820,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000224000100",
+          "startTime": "2019-9-2 20:36:19",
+          "stopTime": "2019-9-2 20:45:56",
+          "size": 143283420,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000228000000",
+          "startTime": "2019-9-2 20:45:56",
+          "stopTime": "2019-9-2 21:55:14",
+          "size": 1066213516,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000232000000",
+          "startTime": "2019-9-2 21:55:14",
+          "stopTime": "2019-9-2 23:4:31",
+          "size": 1065723700,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0001_00000000235000000",
+          "startTime": "2019-9-2 23:4:31",
+          "stopTime": "2019-9-3 0:13:49",
+          "size": 1066149784,
+          "fileType": 0
+        }
+      ]
+    },
+    {
+      "chanNo": 34,
+      "startTime": "2019-9-2 0:0:0",
+      "stopTime": "2019-9-3 0:0:0",
+      "files": [
+        {
+          "filename": "ch0002_00000000809000000",
+          "startTime": "2019-9-1 22:56:56",
+          "stopTime": "2019-9-2 0:4:0",
+          "size": 1065548092,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000814000000",
+          "startTime": "2019-9-2 0:4:0",
+          "stopTime": "2019-9-2 1:11:4",
+          "size": 1065547360,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000818000000",
+          "startTime": "2019-9-2 1:11:4",
+          "stopTime": "2019-9-2 2:18:8",
+          "size": 1065548644,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000823000000",
+          "startTime": "2019-9-2 2:18:8",
+          "stopTime": "2019-9-2 3:25:12",
+          "size": 1065549232,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000826000000",
+          "startTime": "2019-9-2 3:25:12",
+          "stopTime": "2019-9-2 4:32:16",
+          "size": 1065547144,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000831000000",
+          "startTime": "2019-9-2 4:32:16",
+          "stopTime": "2019-9-2 5:39:20",
+          "size": 1065545712,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000835000000",
+          "startTime": "2019-9-2 5:39:20",
+          "stopTime": "2019-9-2 6:46:24",
+          "size": 1065523360,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000840000000",
+          "startTime": "2019-9-2 6:46:24",
+          "stopTime": "2019-9-2 7:53:29",
+          "size": 1065574108,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000844000000",
+          "startTime": "2019-9-2 7:53:29",
+          "stopTime": "2019-9-2 9:0:32",
+          "size": 1065565288,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000849000000",
+          "startTime": "2019-9-2 9:0:32",
+          "stopTime": "2019-9-2 10:7:36",
+          "size": 1065626588,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000852000000",
+          "startTime": "2019-9-2 10:7:36",
+          "stopTime": "2019-9-2 11:14:40",
+          "size": 1065547956,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000857000000",
+          "startTime": "2019-9-2 11:14:40",
+          "stopTime": "2019-9-2 12:21:44",
+          "size": 1065573168,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000861000000",
+          "startTime": "2019-9-2 12:21:44",
+          "stopTime": "2019-9-2 13:28:48",
+          "size": 1065631660,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000864000000",
+          "startTime": "2019-9-2 13:28:48",
+          "stopTime": "2019-9-2 14:35:52",
+          "size": 1065551692,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000869000000",
+          "startTime": "2019-9-2 14:35:52",
+          "stopTime": "2019-9-2 15:42:56",
+          "size": 1065582304,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000873000000",
+          "startTime": "2019-9-2 15:42:56",
+          "stopTime": "2019-9-2 16:50:0",
+          "size": 1065586908,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000878000000",
+          "startTime": "2019-9-2 16:50:0",
+          "stopTime": "2019-9-2 17:57:4",
+          "size": 1065610600,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000881000000",
+          "startTime": "2019-9-2 17:57:4",
+          "stopTime": "2019-9-2 19:4:8",
+          "size": 1065559076,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000886000000",
+          "startTime": "2019-9-2 19:4:8",
+          "stopTime": "2019-9-2 20:11:12",
+          "size": 1065600080,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000890000000",
+          "startTime": "2019-9-2 20:11:12",
+          "stopTime": "2019-9-2 20:35:2",
+          "size": 378735572,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000890000100",
+          "startTime": "2019-9-2 20:36:19",
+          "stopTime": "2019-9-2 21:19:44",
+          "size": 686970892,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000895000000",
+          "startTime": "2019-9-2 21:19:44",
+          "stopTime": "2019-9-2 22:26:47",
+          "size": 1065578756,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000899000000",
+          "startTime": "2019-9-2 22:26:47",
+          "stopTime": "2019-9-2 23:33:51",
+          "size": 1065582484,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0002_00000000904000000",
+          "startTime": "2019-9-2 23:33:51",
+          "stopTime": "2019-9-3 0:40:55",
+          "size": 1065553648,
+          "fileType": 0
+        }
+      ]
+    },
+    {
+      "chanNo": 35,
+      "startTime": "2019-9-2 0:0:0",
+      "stopTime": "2019-9-3 0:0:0",
+      "files": [
+        {
+          "filename": "ch0003_00000000812000000",
+          "startTime": "2019-9-1 23:49:20",
+          "stopTime": "2019-9-2 0:25:39",
+          "size": 1065581100,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000815000000",
+          "startTime": "2019-9-2 0:25:39",
+          "stopTime": "2019-9-2 1:2:4",
+          "size": 1065889248,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000817000000",
+          "startTime": "2019-9-2 1:2:4",
+          "stopTime": "2019-9-2 1:38:21",
+          "size": 1065920956,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000820000000",
+          "startTime": "2019-9-2 1:38:21",
+          "stopTime": "2019-9-2 2:14:46",
+          "size": 1066159836,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000821000000",
+          "startTime": "2019-9-2 2:14:46",
+          "stopTime": "2019-9-2 2:51:11",
+          "size": 1066133424,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000824000000",
+          "startTime": "2019-9-2 2:51:11",
+          "stopTime": "2019-9-2 3:27:34",
+          "size": 1065846220,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000827000000",
+          "startTime": "2019-9-2 3:27:34",
+          "stopTime": "2019-9-2 4:3:53",
+          "size": 1065909312,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000829000000",
+          "startTime": "2019-9-2 4:3:53",
+          "stopTime": "2019-9-2 4:40:10",
+          "size": 1065723048,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000832000000",
+          "startTime": "2019-9-2 4:40:10",
+          "stopTime": "2019-9-2 5:16:31",
+          "size": 1065581880,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000834000000",
+          "startTime": "2019-9-2 5:16:31",
+          "stopTime": "2019-9-2 5:52:50",
+          "size": 1065255672,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000837000000",
+          "startTime": "2019-9-2 5:52:50",
+          "stopTime": "2019-9-2 6:29:13",
+          "size": 1066076664,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000838000000",
+          "startTime": "2019-9-2 6:29:13",
+          "stopTime": "2019-9-2 7:5:30",
+          "size": 1065297712,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000841000000",
+          "startTime": "2019-9-2 7:5:30",
+          "stopTime": "2019-9-2 7:41:49",
+          "size": 1065257308,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000843000000",
+          "startTime": "2019-9-2 7:41:49",
+          "stopTime": "2019-9-2 8:18:8",
+          "size": 1065414824,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000846000000",
+          "startTime": "2019-9-2 8:18:8",
+          "stopTime": "2019-9-2 8:54:35",
+          "size": 1065457184,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000847000000",
+          "startTime": "2019-9-2 8:54:35",
+          "stopTime": "2019-9-2 9:33:20",
+          "size": 1065271988,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000850000000",
+          "startTime": "2019-9-2 9:33:20",
+          "stopTime": "2019-9-2 10:19:25",
+          "size": 1065865628,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000853000000",
+          "startTime": "2019-9-2 10:19:25",
+          "stopTime": "2019-9-2 11:5:32",
+          "size": 1065544800,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000855000000",
+          "startTime": "2019-9-2 11:5:32",
+          "stopTime": "2019-9-2 11:42:53",
+          "size": 1065508432,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000858000000",
+          "startTime": "2019-9-2 11:42:53",
+          "stopTime": "2019-9-2 12:19:24",
+          "size": 1065370068,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000860000000",
+          "startTime": "2019-9-2 12:19:24",
+          "stopTime": "2019-9-2 12:57:41",
+          "size": 1065867608,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000863000000",
+          "startTime": "2019-9-2 12:57:41",
+          "stopTime": "2019-9-2 13:34:12",
+          "size": 1065416320,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000866000000",
+          "startTime": "2019-9-2 13:34:12",
+          "stopTime": "2019-9-2 14:10:45",
+          "size": 1065638976,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000867000000",
+          "startTime": "2019-9-2 14:10:45",
+          "stopTime": "2019-9-2 14:47:32",
+          "size": 1065974100,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000870000000",
+          "startTime": "2019-9-2 14:47:32",
+          "stopTime": "2019-9-2 15:23:59",
+          "size": 1065476848,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000872000000",
+          "startTime": "2019-9-2 15:23:59",
+          "stopTime": "2019-9-2 16:0:28",
+          "size": 1066133976,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000875000000",
+          "startTime": "2019-9-2 16:0:28",
+          "stopTime": "2019-9-2 16:36:59",
+          "size": 1065427516,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000876000000",
+          "startTime": "2019-9-2 16:36:59",
+          "stopTime": "2019-9-2 17:19:8",
+          "size": 1065266472,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000879000000",
+          "startTime": "2019-9-2 17:19:8",
+          "stopTime": "2019-9-2 18:5:41",
+          "size": 1065477128,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000883000000",
+          "startTime": "2019-9-2 18:5:41",
+          "stopTime": "2019-9-2 18:50:22",
+          "size": 1065992276,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000884000000",
+          "startTime": "2019-9-2 18:50:22",
+          "stopTime": "2019-9-2 19:26:49",
+          "size": 1065811300,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000887000000",
+          "startTime": "2019-9-2 19:26:49",
+          "stopTime": "2019-9-2 20:3:22",
+          "size": 1065629604,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000000",
+          "startTime": "2019-9-2 20:3:22",
+          "stopTime": "2019-9-2 20:35:3",
+          "size": 908957252,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000100",
+          "startTime": "2019-9-2 20:36:40",
+          "stopTime": "2019-9-2 20:36:44",
+          "size": 3885152,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000200",
+          "startTime": "2019-9-2 20:37:24",
+          "stopTime": "2019-9-2 20:37:28",
+          "size": 3853480,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000300",
+          "startTime": "2019-9-2 20:38:8",
+          "stopTime": "2019-9-2 20:38:11",
+          "size": 938744,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000400",
+          "startTime": "2019-9-2 20:38:50",
+          "stopTime": "2019-9-2 20:38:54",
+          "size": 697792,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000500",
+          "startTime": "2019-9-2 20:39:33",
+          "stopTime": "2019-9-2 20:39:37",
+          "size": 873928,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000600",
+          "startTime": "2019-9-2 20:40:16",
+          "stopTime": "2019-9-2 20:40:19",
+          "size": 1123840,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000700",
+          "startTime": "2019-9-2 20:40:59",
+          "stopTime": "2019-9-2 20:41:3",
+          "size": 1965644,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000800",
+          "startTime": "2019-9-2 20:41:43",
+          "stopTime": "2019-9-2 20:41:47",
+          "size": 2032008,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889000900",
+          "startTime": "2019-9-2 20:42:28",
+          "stopTime": "2019-9-2 20:42:31",
+          "size": 1804332,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001000",
+          "startTime": "2019-9-2 20:43:11",
+          "stopTime": "2019-9-2 20:43:15",
+          "size": 1845472,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001100",
+          "startTime": "2019-9-2 20:43:56",
+          "stopTime": "2019-9-2 20:44:0",
+          "size": 2721912,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001200",
+          "startTime": "2019-9-2 20:44:39",
+          "stopTime": "2019-9-2 20:44:43",
+          "size": 1323780,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001300",
+          "startTime": "2019-9-2 20:45:22",
+          "stopTime": "2019-9-2 20:45:26",
+          "size": 1324816,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001400",
+          "startTime": "2019-9-2 20:46:5",
+          "stopTime": "2019-9-2 20:46:9",
+          "size": 905620,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001500",
+          "startTime": "2019-9-2 20:46:49",
+          "stopTime": "2019-9-2 20:46:53",
+          "size": 1633312,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001600",
+          "startTime": "2019-9-2 20:47:32",
+          "stopTime": "2019-9-2 20:47:36",
+          "size": 2046020,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001700",
+          "startTime": "2019-9-2 20:48:15",
+          "stopTime": "2019-9-2 20:48:19",
+          "size": 1070804,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001800",
+          "startTime": "2019-9-2 20:48:58",
+          "stopTime": "2019-9-2 20:49:3",
+          "size": 1474048,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889001900",
+          "startTime": "2019-9-2 20:49:41",
+          "stopTime": "2019-9-2 20:49:45",
+          "size": 1043192,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889002000",
+          "startTime": "2019-9-2 20:50:24",
+          "stopTime": "2019-9-2 20:50:28",
+          "size": 1467492,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889002100",
+          "startTime": "2019-9-2 20:51:7",
+          "stopTime": "2019-9-2 20:51:11",
+          "size": 2121784,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000889002200",
+          "startTime": "2019-9-2 20:51:51",
+          "stopTime": "2019-9-2 20:56:41",
+          "size": 120109280,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000893000000",
+          "startTime": "2019-9-2 20:56:41",
+          "stopTime": "2019-9-2 21:33:28",
+          "size": 1065580456,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000896000000",
+          "startTime": "2019-9-2 21:33:28",
+          "stopTime": "2019-9-2 22:10:23",
+          "size": 1065338096,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000898000000",
+          "startTime": "2019-9-2 22:10:23",
+          "stopTime": "2019-9-2 22:47:22",
+          "size": 1065713880,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000901000000",
+          "startTime": "2019-9-2 22:47:22",
+          "stopTime": "2019-9-2 23:24:22",
+          "size": 1065508568,
+          "fileType": 0
+        },
+        {
+          "filename": "ch0003_00000000902000000",
+          "startTime": "2019-9-2 23:24:22",
+          "stopTime": "2019-9-3 0:1:1",
+          "size": 1065631452,
+          "fileType": 0
+        }
+      ]
+    }
+  ]
+}

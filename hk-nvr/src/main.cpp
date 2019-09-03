@@ -366,12 +366,24 @@ int getRecordFile(LONG lUserID, LONG lChannel, NET_DVR_TIME struStartTime, NET_D
   {
     printf("{\n");
     printf("\"filename\":\"%s\",\n", lpFindData[i].sFileName);
-    printf("\"size\":\"%d\"\n", lpFindData[i].dwFileSize);
-      // "filename": "ch0002_00000000002000300",
-      // "startTime": "2019-8-1 2:20:23",
-      // "stopTime": "2019-8-5 12:20:23",
-      // "size": 112213121,
-      // "fileType": 0, // 等同于recordType
+    printf("\"startTime\":\"%d-%d-%d %d:%d:%d\",\n",
+      lpFindData[i].struStartTime.dwYear,
+      lpFindData[i].struStartTime.dwMonth,
+      lpFindData[i].struStartTime.dwDay,
+      lpFindData[i].struStartTime.dwHour,
+      lpFindData[i].struStartTime.dwMinute,
+      lpFindData[i].struStartTime.dwSecond
+    );
+    printf("\"stopTime\":\"%d-%d-%d %d:%d:%d\",\n",
+      lpFindData[i].struStopTime.dwYear,
+      lpFindData[i].struStopTime.dwMonth,
+      lpFindData[i].struStopTime.dwDay,
+      lpFindData[i].struStopTime.dwHour,
+      lpFindData[i].struStopTime.dwMinute,
+      lpFindData[i].struStopTime.dwSecond
+    );
+    printf("\"size\":%d,\n", lpFindData[i].dwFileSize);
+    printf("\"fileType\":%d\n", lpFindData[i].byFileType);
     if (i == count - 1)
     {
       printf("}\n");
